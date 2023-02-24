@@ -1,11 +1,19 @@
 <div>
    Show Tweets
-   <p>{{ $message }}</p>
-   <input type="text" name="message" id="message" wire:model='message'>
+   <p>{{ $content }}</p>
+   <form  method="post" wire:submit.prevent='create'>
+       <input type="text" name="content" id="content" wire:model='content'>
+       <button type="submit">Criar Tweet</button>
+       @error('content') <br>{{ $message }}       @enderror
 
+   </form>
+<br>
    <tr>
     @foreach ($tweets as $tweet)
-    {{ $tweet->user->name }} - {{ $tweet->content }}
+    {{ $tweet->user->name }} - {{ $tweet->content }} <br>
     @endforeach
-   </tr>
+    </tr>
+    <div>
+        {{ $tweets->links() }}
+    </div>
 </div>
